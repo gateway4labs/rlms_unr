@@ -137,5 +137,5 @@ def _rc4(data, key):
     return ''.join(output)
 
 
-register("FCEIA/UNR", ['1.0'], __name__)
+register("FCEIA-UNR", ['1.0'], __name__)
 
