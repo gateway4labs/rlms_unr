@@ -16,7 +16,6 @@ classifiers=[
 cp_license="MIT"
 
 # TODO: depend on lms4labs
-# TODO: see how is it managed in flask_login setup.py (it's not a package, but rather a simple file)
 
 setup(name='l4l_rlms_unr',
       version='0.1',
@@ -26,4 +25,5 @@ setup(name='l4l_rlms_unr',
       author_email='pablo.orduna@deusto.es, flerro@yahoo.ar',
       url='http://github.com/lms4labs/rlms_unr/',
       license=cp_license,
+      py_modules=['l4l_rlms_unr'],
      )
