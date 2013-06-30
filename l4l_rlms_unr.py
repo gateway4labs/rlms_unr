@@ -10,7 +10,7 @@ from flask.ext.wtf import TextField, PasswordField, Required, URL, ValidationErr
 
 from labmanager.forms import AddForm, RetrospectiveForm, GenericPermissionForm
 from labmanager.rlms import register, Laboratory
-from labmanager.rlms.base import BaseRLMS, BaseFormCreator
+from labmanager.rlms.base import BaseRLMS, BaseFormCreator, Versions
 
 def get_module(version):
     """get_module(version) -> proper module for that version
@@ -74,6 +74,12 @@ class RLMS(BaseRLMS):
         if self.login is None or self.password is None or self.url is None:
             raise Exception("Laboratory misconfigured: fields missing" )
 
+    def get_version(self):
+        return Versions.VERSION_1
+
+    def get_capabilities(self):
+        return []
+
     def test(self):
         json.loads(self.configuration)
         # TODO
@@ -82,7 +88,7 @@ class RLMS(BaseRLMS):
     def get_laboratories(self):
         return [ Laboratory('unr-physics', 'unr-physics') ]
 
-    def reserve(self, laboratory_id, username, general_configuration_str, particular_configurations, request_payload, user_agent, origin_ip, referer):
+    def reserve(self, laboratory_id, username, general_configuration_str, particular_configurations, request_payload, user_properties, *args, **kwargs):
 
         dtime = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
