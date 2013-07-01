@@ -15,15 +15,13 @@ classifiers=[
 
 cp_license="MIT"
 
-# TODO: depend on lms4labs
-
-setup(name='l4l_rlms_unr',
+setup(name='g4l_rlms_unr',
       version='0.1',
-      description="FCEIA/Universidad Nacional del Rosario physics laboratory plug-in in the lms4labs",
+      description="FCEIA/Universidad Nacional del Rosario physics laboratory plug-in in the gateway4labs project",
       classifiers=classifiers,
       author='Pablo Orduña, Federico Lerro',
       author_email='pablo.orduna@deusto.es, flerro2@yahoo.com.ar',
-      url='http://github.com/lms4labs/rlms_unr/',
+      url='http://github.com/gateway4labs/rlms_unr/',
       license=cp_license,
-      py_modules=['l4l_rlms_unr'],
+      py_modules=['g4l_rlms_unr'],
      )
