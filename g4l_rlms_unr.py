@@ -88,7 +88,7 @@ class RLMS(BaseRLMS):
     def get_laboratories(self):
         return [ Laboratory('unr-physics', 'unr-physics') ]
 
-    def reserve(self, laboratory_id, username, general_configuration_str, particular_configurations, request_payload, user_properties, *args, **kwargs):
+    def reserve(self, laboratory_id, username, institution, general_configuration_str, particular_configurations, request_payload, user_properties, *args, **kwargs):
 
         dtime = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
