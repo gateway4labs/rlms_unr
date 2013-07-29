@@ -103,11 +103,16 @@ class RLMS(BaseRLMS):
         data_hash = hashlib.new("md5", data).hexdigest()
         tpl       = '%(URL)s?id_instalacion=%(INSTALLATION)s&cadena=%(DATA)s&checksum=%(HASH)s'
 
-        return tpl %  {
+        url = tpl %  {
             'URL'          : self.url,
             'INSTALLATION' : self.login,
             'DATA'         : crypted.encode('hex'), 
             'HASH'         : data_hash,
+        }
+
+        return {
+            'reservation_id' : '',
+            'load_url' : url
         }
 
 
