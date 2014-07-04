@@ -1,4 +1,4 @@
-WebLab-Deusto plug-in
+UNR plug-in
 =====================
 
 The `LabManager <http://github.com/gateway4labs/labmanager/>`_ provides an API for
