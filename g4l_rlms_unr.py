@@ -23,9 +23,12 @@ def get_module(version):
 
 class UnrAddForm(AddForm):
 
+    DEFAULT_LOCATION = 'Rosario, Argentina'
+    DEFAULT_URL = 'http://labremf4a.fceia.unr.edu.ar/about/'
+
     remote_login = TextField("Login",        validators = [Required()])
     password     = PasswordField("Password")
-    url          = TextField("URL",    validators = [Required(), URL() ])
+    remote_url   = TextField("FCEIA URL", default = "http://labremf4a.fceia.unr.edu.ar/accesodeusto.aspx", validators = [Required(), URL(False)])
 
     def __init__(self, add_or_edit, *args, **kwargs):
         super(UnrAddForm, self).__init__(*args, **kwargs)
@@ -69,9 +72,9 @@ class RLMS(BaseRLMS):
 
         self.login    = self.configuration.get('remote_login')
         self.password = self.configuration.get('password')
-        self.url = self.configuration.get('url')
+        self.remote_url = self.configuration.get('remote_url')
         
-        if self.login is None or self.password is None or self.url is None:
+        if self.login is None or self.password is None or self.remote_url is None:
             raise Exception("Laboratory misconfigured: fields missing" )
 
     def get_version(self):
@@ -81,7 +84,6 @@ class RLMS(BaseRLMS):
         return []
 
     def test(self):
-        json.loads(self.configuration)
         # TODO
         return None
 
@@ -104,7 +106,7 @@ class RLMS(BaseRLMS):
         tpl       = '%(URL)s?id_instalacion=%(INSTALLATION)s&cadena=%(DATA)s&checksum=%(HASH)s'
 
         url = tpl %  {
-            'URL'          : self.url,
+            'URL'          : self.remote_url, 
             'INSTALLATION' : self.login,
             'DATA'         : crypted.encode('hex'), 
             'HASH'         : data_hash,
