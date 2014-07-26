@@ -114,7 +114,7 @@ class RLMS(BaseRLMS):
         }
 
     def list_widgets(self, laboratory_id, **kwargs):
-        return [ dict(name = u'UNR FCEIA', description = u'UNR FCEIA Physics remote laboratory') ]
+        return [ dict(name = u'UNR_FCEIA', description = u'UNR FCEIA Physics remote laboratory') ]
 
     def load_widget(self, reservation_id, widget_name, **kwargs):
         return {
