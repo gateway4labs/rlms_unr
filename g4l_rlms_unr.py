@@ -84,7 +84,7 @@ class RLMS(BaseRLMS):
         return [ Capabilities.WIDGET ] 
 
     def get_laboratories(self):
-        return [ Laboratory('unr-physics', 'unr-physics') ]
+        return [ Laboratory('unr-physics', 'unr-physics', autoload = True) ]
 
     def reserve(self, laboratory_id, username, institution, general_configuration_str, particular_configurations, request_payload, user_properties, *args, **kwargs):
 
