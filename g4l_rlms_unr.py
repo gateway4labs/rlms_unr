@@ -9,7 +9,7 @@ import hashlib
 from flask.ext.wtf import TextField, PasswordField, Required, URL, ValidationError
 
 from labmanager.forms import AddForm, RetrospectiveForm, GenericPermissionForm
-from labmanager.rlms import register, Laboratory
+from labmanager.rlms import register, Laboratory, Capabilities
 from labmanager.rlms.base import BaseRLMS, BaseFormCreator, Versions
 
 def get_module(version):
@@ -81,11 +81,7 @@ class RLMS(BaseRLMS):
         return Versions.VERSION_1
 
     def get_capabilities(self):
-        return []
-
-    def test(self):
-        # TODO
-        return None
+        return [ Capabilities.WIDGET ] 
 
     def get_laboratories(self):
         return [ Laboratory('unr-physics', 'unr-physics') ]
@@ -113,10 +109,17 @@ class RLMS(BaseRLMS):
         }
 
         return {
-            'reservation_id' : '',
+            'reservation_id' : url,
             'load_url' : url
         }
 
+    def list_widgets(self, laboratory_id, **kwargs):
+        return [ dict(name = u'UNR FCEIA', description = u'UNR FCEIA Physics remote laboratory') ]
+
+    def load_widget(self, reservation_id, widget_name, **kwargs):
+        return {
+            'url' : reservation_id 
+        }
 
 def _rc4(data, key):
     """
