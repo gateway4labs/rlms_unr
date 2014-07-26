@@ -9,7 +9,7 @@ import urllib2
 
 from flask.ext.wtf import TextField, PasswordField, Required, URL, ValidationError
 
-from labmanager.forms import AddForm, RetrospectiveForm, GenericPermissionForm
+from labmanager.forms import AddForm
 from labmanager.rlms import register, Laboratory, Capabilities
 from labmanager.rlms.base import BaseRLMS, BaseFormCreator, Versions
 
@@ -47,22 +47,10 @@ class UnrAddForm(AddForm):
         if form.add_or_edit and field.data == '':
             raise ValidationError("This field is required.")
 
-class UnrPermissionForm(RetrospectiveForm):
-    pass
-
-class UnrLmsPermissionForm(UnrPermissionForm, GenericPermissionForm):
-    pass
-
 class UnrFormCreator(BaseFormCreator):
 
     def get_add_form(self):
         return UnrAddForm
-
-    def get_permission_form(self):
-        return UnrPermissionForm
-
-    def get_lms_permission_form(self):
-        return UnrLmsPermissionForm
 
 FORM_CREATOR = UnrFormCreator()
 
