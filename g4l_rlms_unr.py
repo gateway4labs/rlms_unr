@@ -5,6 +5,7 @@ import json
 import datetime
 import uuid
 import hashlib
+import urllib2
 
 from flask.ext.wtf import TextField, PasswordField, Required, URL, ValidationError
 
@@ -109,16 +110,16 @@ class RLMS(BaseRLMS):
         }
 
         return {
-            'reservation_id' : url,
+            'reservation_id' : urllib2.quote(url),
             'load_url' : url
         }
 
     def list_widgets(self, laboratory_id, **kwargs):
-        return [ dict(name = u'UNR_FCEIA', description = u'UNR FCEIA Physics remote laboratory') ]
+        return [ dict(name = u'UNR_FCEIA', description = u'UNR FCEIA Physics remote laboratory', height = '900px') ]
 
     def load_widget(self, reservation_id, widget_name, **kwargs):
         return {
-            'url' : reservation_id 
+            'url' : urllib2.unquote(reservation_id)
         }
 
 def _rc4(data, key):
